@@ -2,8 +2,9 @@ import React from "react";
 import { Router, Route, IndexRoute } from "react-router";
 import { history } from "./store.js";
 import App from "./components/App";
-import {userSearch as Home} from "./components/Home";
-import Api from "./components/Api"
+import {SearchBar} from "./components/GitUserSearch/SearchBar";
+import SearchResults from "./components/GitUserSearch/SearchResults"
+import GitUserSearch from "./components/GitUserSearch/GitUserSearch"
 import NotFound from "./components/NotFound";
 
 // build the router
@@ -11,9 +12,10 @@ const router = (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
     {/*<Route path="/" component={App} />*/}
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="Home" component={Home}/>
-      <Route path="Api" component={Api}/>
+      <IndexRoute component={SearchBar} />
+      <Route path="SearchBar" component={SearchBar}/>
+      <Route path="SearchResults" component={SearchResults}/>
+      <Route path="GitUserSearch" component={GitUserSearch}/>
       <Route path="*" component={NotFound}/>
     </Route>
 

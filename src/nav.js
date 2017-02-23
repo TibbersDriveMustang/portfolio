@@ -31,21 +31,21 @@ export class Navigation extends React.Component{
         {/*</Navbar.Header>*/}
         <Navbar.Collapse>
           <Nav bsStyle="pills" activeKey={3}>
-            <LinkContainer to="Home">
+            <LinkContainer to="SearchBar">
               <NavItem eventKey={1}>
                 Home
               </NavItem>
             </LinkContainer>
 
-            <LinkContainer to="Api">
+            <LinkContainer to="SearchResult">
               <NavItem eventKey={2}>
                 About
               </NavItem>
             </LinkContainer>
 
-            <LinkContainer to="afterSchoolProgram">
+            <LinkContainer to="GitUserSearch">
               <NavItem eventKey={3}>
-                After School Program
+                Git Search
               </NavItem>
             </LinkContainer>
 

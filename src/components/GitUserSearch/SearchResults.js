@@ -2,9 +2,8 @@
  * Created by Tibbers on 2/14/17.
  */
 import React from "react"
-import {userSearch as UserSearch}  from './Home'
 
-class Api extends React.Component{
+class SearchResults extends React.Component{
 
   constructor(props){
     super(props)
@@ -49,7 +48,6 @@ class Api extends React.Component{
     }
     return (
       <div>
-        <UserSearch />
         <h3>User Search Results: </h3>
         {
           arrays != null
@@ -69,4 +67,4 @@ class Api extends React.Component{
   }
 }
 
-export default Api
+export default SearchResults

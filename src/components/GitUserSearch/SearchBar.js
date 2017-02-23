@@ -1,5 +1,4 @@
 import React from "react";
-import api from './Api'
 import MdAddCircle from 'react-icons/lib/md/add-circle'
 
 // const tahoeResorts = [
@@ -20,7 +19,7 @@ const userList = [
 
 
 // Home page component
-class Autocomplete extends React.Component {
+export class Autocomplete extends React.Component {
   // get value() {
   //   const input = this.refs.inputUser.value
   //   console.log("input value" + input)
@@ -31,12 +30,18 @@ class Autocomplete extends React.Component {
   //   this.refs.inputUser.value = inputValue
   // }
 
+  constructor(props){
+    super(props)
+  }
+
   componentDidMount(){
-      const input = this.refs.inputUser.value
+      var input = this.refs.inputUser.value
       console.log("input value" + input)
   }
 
+
   render() {
+    console.log("Bugs here")
     return (
       <div>
         <input ref="inputUser"
@@ -53,7 +58,7 @@ class Autocomplete extends React.Component {
 }
 
 
-export const userSearch = ({ resort,
+export const SearchBar = ({ resort,
   date,
   powder,
   backcountry,
@@ -114,7 +119,7 @@ export const userSearch = ({ resort,
   )
 }
 
-userSearch.defaultProps = {
+SearchBar.defaultProps = {
   resort: "Kirkwood",
   date: "2017-02-12",
   powder: true,
@@ -122,7 +127,7 @@ userSearch.defaultProps = {
 }
 
 
-userSearch.propTypes = {
+SearchBar.propTypes = {
   resort: React.PropTypes.string.isRequired,
   date: React.PropTypes.string.isRequired,
   powder: React.PropTypes.bool.isRequired,
