@@ -2,26 +2,21 @@
  * Created by Tibbers on 2/14/17.
  */
 import React from "react"
+import {userSearch as UserSearch}  from './Home'
 
 class Api extends React.Component{
+
   constructor(props){
     super(props)
-    var xmlHttp = new XMLHttpRequest();
-    // xmlHttp.open("GET", 'https://api.github.com/users', false);
-    xmlHttp.open("GET", 'https://api.github.com/search/users?q=aron', false);
-    xmlHttp.send(null);
-
+    // var xmlHttp = new XMLHttpRequest();
     this.state = {
-      items: JSON.parse(xmlHttp.responseText),
-      gitResponse: JSON.parse(xmlHttp.responseText),
-      userDisplay: []
-    };
+      gitResponse: {},
+      xmlHttp: new XMLHttpRequest()
+    }
   }
 
   componentWillMount(){
 
-
-    console.log(this.state.items);
     // this.setState({
     //   items: json
     // });
@@ -36,13 +31,29 @@ class Api extends React.Component{
     // console.log(this.state.userDisplay);
 
   }
+
+  componentDidMount(){
+    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=aron', false);
+    this.state.xmlHttp.send(null);
+    this.setState({
+      gitResponse: JSON.parse(this.state.xmlHttp.responseText)
+    });
+  }
+
   render(){
     // const arrays = this.state.items;
-    const arrays = this.state.gitResponse.items;
+    console.log("Mounting");
+    var arrays = null;
+    if(this.state.gitResponse) {
+      arrays = this.state.gitResponse.items;
+    }
     return (
       <div>
+        <UserSearch />
         <h3>User Search Results: </h3>
         {
+          arrays != null
+          &&
           arrays.map(
             (data) =>
               <div key={data.login}>
