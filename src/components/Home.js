@@ -21,12 +21,19 @@ const userList = [
 
 // Home page component
 class Autocomplete extends React.Component {
-  get value() {
-    return this.refs.inputUser.value
-  }
+  // get value() {
+  //   const input = this.refs.inputUser.value
+  //   console.log("input value" + input)
+  //   return input
+  // }
+  //
+  // set value(inputValue) {
+  //   this.refs.inputUser.value = inputValue
+  // }
 
-  set value(inputValue) {
-    this.refs.inputUser.value = inputValue
+  componentDidMount(){
+      const input = this.refs.inputUser.value
+      console.log("input value" + input)
   }
 
   render() {
