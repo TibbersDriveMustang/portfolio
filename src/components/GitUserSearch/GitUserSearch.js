@@ -28,18 +28,25 @@ export default class GitUserSearch extends React.Component {
 
   render(){
     var arrays = null;
+    let _user;
+
+    console.log("gitResponse: " + this.state.gitResponse);
     if(this.state.gitResponse) {
-      arrays = this.state.gitResponse.items;
+      if(this.state.gitResponse.items) {
+        console.log("Items: " + this.state.gitResponse.items);
+        arrays = this.state.gitResponse.items.map((user) => user.login);
+      }
     }
+
 
     return (
       <div>
         <h1>GitHub User Search</h1>
-        <SearchBar/>
+        {/*<SearchBar/>*/}
         { arrays == null ?
-          <h3>True</h3> : <Autocomplete options={arrays} ref={input => _user = input}/>
+          <h3>Array is null</h3> : <Autocomplete options={arrays} ref={input => _user = input}/>
         }
-        <SearchResults/>
+        {/*<SearchResults/>*/}
       </div>
     )
   }
