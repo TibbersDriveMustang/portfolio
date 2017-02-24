@@ -14,26 +14,50 @@ export default class GitUserSearch extends React.Component {
     // var xmlHttp = new XMLHttpRequest();
     this.state = {
       gitResponse: {},
-      xmlHttp: new XMLHttpRequest()
+      xmlHttp: new XMLHttpRequest(),
+      userName: 'aron'
     }
+
+    this.handleUserChange = this.handleUserChange.bind(this);
+  }
+
+  componentWillMount(){
+    this.setState({
+      userName: 'kitt'
+    });
   }
 
   componentDidMount(){
-    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=aron', false);
+    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName, false);
+    console.log('componentDidMount');
     this.state.xmlHttp.send(null);
     this.setState({
       gitResponse: JSON.parse(this.state.xmlHttp.responseText)
     });
   }
 
+  handleUserChange(event){
+    this.setState({
+      userName: event.target.value
+    });
+
+    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName, false);
+    this.state.xmlHttp.send(null);
+
+    this.setState({
+      gitResponse: JSON.parse(this.state.xmlHttp.responseText)
+    });
+    console.log('handleUserChange');
+  }
+
   render(){
     var arrays = null;
     let _user;
 
-    console.log("gitResponse: " + this.state.gitResponse);
     if(this.state.gitResponse) {
       if(this.state.gitResponse.items) {
-        console.log("Items: " + this.state.gitResponse.items);
+        console.log("Items: ");
+        console.log(this.state.gitResponse.items);
         arrays = this.state.gitResponse.items.map((user) => user.login);
       }
     }
@@ -43,6 +67,7 @@ export default class GitUserSearch extends React.Component {
       <div>
         <h1>GitHub User Search</h1>
         {/*<SearchBar/>*/}
+        <input type="text" value={this.state.userName} onChange={this.handleUserChange}/>
         { arrays == null ?
           <h3>Array is null</h3> : <Autocomplete options={arrays} ref={input => _user = input}/>
         }

@@ -50,7 +50,7 @@ export class Autocomplete extends React.Component {
         <datalist id="user-list">
           {this.props.options.map(
             (opt, i) =>
-              <option key={i}>&#xf00c;{opt}</option>)}
+              <option key={i}>{opt}</option>)}
         </datalist>
       </div>
     )
