@@ -75,17 +75,6 @@ export default class GitUserSearch extends React.Component {
           arrays == null ?
           <h3>Array is null</h3> : <Autocomplete options={userNameList} ref={input => _user = input}/>
         }
-        {/*<SearchResults/>*/}
-        {
-          arrays == null ?
-            <h3>Array is null</h3> : arrays.map(
-            (data) => <div key={data.login}>
-              <a href={data.html_url} target="_blank"/>
-              <img src={data.avatar_url} style={{width: 30 , height: 30}}/>
-              {data.login}
-            </div>
-          )
-        }
 
         <SearchResult arrays={arrays}/>
       </div>

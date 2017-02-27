@@ -6,16 +6,20 @@ import React from 'react'
 
 function ResultList(props){
   const arrays = props.arrays;
+  console.log("Test: props.arrays")
+  console.log(props.arrays);
   if(arrays != null){
-    return (
-      <div>
-        arrays.map(
-        (data) => <div key={data.login}>
+    const divArr = arrays.map(
+      (data) => <div key={data.login}>
         <a href={data.html_url} target="_blank"/>
         <img src={data.avatar_url} style={{width: 30 , height: 30}}/>
         {data.login}
       </div>
-        )
+    );
+
+    return (
+      <div>
+        {divArr}
       </div>
     )
   }
@@ -32,8 +36,11 @@ export default class SearchResult extends React.Component{
   }
 
   render(){
+    console.log('this.props: ');
+    console.log(this.props.arrays);
+
     return (
-      <ResultList props = {this.props}/>
+      <ResultList arrays = {this.props.arrays}/>
     )
   }
 }
