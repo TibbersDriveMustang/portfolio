@@ -52,13 +52,15 @@ export default class GitUserSearch extends React.Component {
 
   render(){
     var arrays = null;
+    var userNameList = null;
     let _user;
 
     if(this.state.gitResponse) {
       if(this.state.gitResponse.items) {
         console.log("Items: ");
         console.log(this.state.gitResponse.items);
-        arrays = this.state.gitResponse.items.map((user) => user.login);
+        arrays = this.state.gitResponse.items;
+        userNameList = this.state.gitResponse.items.map((user) => user.login);
       }
     }
 
@@ -67,11 +69,22 @@ export default class GitUserSearch extends React.Component {
       <div>
         <h1>GitHub User Search</h1>
         {/*<SearchBar/>*/}
-        <input type="text" value={this.state.userName} onChange={this.handleUserChange}/>
-        { arrays == null ?
-          <h3>Array is null</h3> : <Autocomplete options={arrays} ref={input => _user = input}/>
+        <input type="text" value={this.state.userName} onChange={this.handleUserChange} list="user-list"/>
+        {
+          arrays == null ?
+          <h3>Array is null</h3> : <Autocomplete options={userNameList} ref={input => _user = input}/>
         }
         {/*<SearchResults/>*/}
+        {
+          arrays == null ?
+            <h3>Array is null</h3> : arrays.map(
+            (data) => <div key={data.login}>
+              <a href={data.html_url} target="_blank"/>
+              <img src={data.avatar_url} style={{width: 30 , height: 30}}/>
+              {data.login}
+            </div>
+          )
+        }
       </div>
     )
   }
