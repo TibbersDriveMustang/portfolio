@@ -6,6 +6,7 @@ import React from 'react'
 import {SearchBar, Autocomplete} from './SearchBar'
 import SearchResults from './SearchResults'
 
+import SearchResult from './SearchResult'
 
 export default class GitUserSearch extends React.Component {
 
@@ -85,6 +86,8 @@ export default class GitUserSearch extends React.Component {
             </div>
           )
         }
+
+        <SearchResult arrays={arrays}/>
       </div>
     )
   }
