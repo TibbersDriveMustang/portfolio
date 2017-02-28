@@ -4,9 +4,10 @@
 import React from 'react'
 
 import {SearchBar, Autocomplete} from './SearchBar'
-import SearchResults from './SearchResults'
 
 import SearchResult from './SearchResult'
+
+import SearchSuggest from './SearchSuggest'
 
 export default class GitUserSearch extends React.Component {
 
@@ -42,7 +43,7 @@ export default class GitUserSearch extends React.Component {
       userName: event.target.value
     });
 
-    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName, false);
+    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName + '&per_page=10', false);
     this.state.xmlHttp.send(null);
 
     this.setState({
@@ -65,7 +66,6 @@ export default class GitUserSearch extends React.Component {
       }
     }
 
-
     return (
       <div>
         <h1>GitHub User Search</h1>
@@ -73,7 +73,9 @@ export default class GitUserSearch extends React.Component {
         <input type="text" value={this.state.userName} onChange={this.handleUserChange} list="user-list"/>
         {
           arrays == null ?
-          <h3>Array is null</h3> : <Autocomplete options={userNameList} ref={input => _user = input}/>
+          <h3>Array is null</h3> : <div><Autocomplete options1={arrays} ref={input => _user = input}/>
+          <SearchSuggest arrays={arrays}/>
+          </div>
         }
 
         <SearchResult arrays={arrays}/>

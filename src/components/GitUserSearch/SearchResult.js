@@ -11,14 +11,16 @@ function ResultList(props){
   if(arrays != null){
     const divArr = arrays.map(
       (data) => <div key={data.login}>
-        <a href={data.html_url} target="_blank"/>
-        <img src={data.avatar_url} style={{width: 30 , height: 30}}/>
-        {data.login}
+        <a href={data.html_url} target="_blank">
+          <img src={data.avatar_url} style={{width: 30 , height: 30}}/>
+          {data.login}
+        </a>
       </div>
     );
 
     return (
       <div>
+        <h6>GITHUB USERS</h6>
         {divArr}
       </div>
     )

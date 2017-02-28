@@ -35,22 +35,25 @@ export class Autocomplete extends React.Component {
   }
 
   componentDidMount(){
-      var input = this.refs.inputUser.value
-      console.log("input value" + input)
+      // var input = this.refs.inputUser.value
+      // console.log("input value" + input)
   }
-
 
   render() {
     console.log("Bugs here")
+    const userList = this.props.options1.map(
+      (opt, i) => <div key={i}><option>{opt.login}</option><img src={opt.avatar_url}/></div>
+    )
     return (
       <div>
-        <input ref="inputUser"
-               type="text"
-               list="user-list" />
+        {/*<input ref="inputUser"*/}
+               {/*type="text"*/}
+               {/*list="user-list" />*/}
         <datalist id="user-list">
-          {this.props.options.map(
-            (opt, i) =>
-              <option key={i}>{opt}</option>)}
+          {/*{this.props.options1.map(*/}
+            {/*(opt, i) =>*/}
+              {/*<option key={i}>{opt}</option>)}*/}
+          {userList}
         </datalist>
       </div>
     )
@@ -85,7 +88,7 @@ export const SearchBar = ({ resort,
     <form className="add-day-form">
 
       <label htmlFor="users">Git Search</label>
-      <Autocomplete options={userList}
+      <Autocomplete options1={userList}
                     ref={input => _user = input}/>
 
       {/*<label htmlFor="date">Date</label>*/}
