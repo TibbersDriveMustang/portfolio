@@ -74,7 +74,7 @@ export default class GitUserSearch extends React.Component {
         {
           arrays == null ?
           <h3>Array is null</h3> : <div><Autocomplete options1={arrays} ref={input => _user = input}/>
-          <SearchSuggest arrays={arrays}/>
+          <SearchSuggest/>
           </div>
         }
 
