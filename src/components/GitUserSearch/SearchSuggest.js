@@ -66,6 +66,9 @@ const languages = [
   }
 ];
 
+
+
+
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
@@ -74,7 +77,6 @@ const getSuggestions = value => {
   return inputLength === 0 ? [] : languages.filter(lang =>
     lang.name.toLowerCase().slice(0, inputLength) === inputValue
   );
-  // return this.props.arrays
 };
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
@@ -85,7 +87,7 @@ const getSuggestionValue = suggestion => suggestion.name;
 // Use your imagination to render suggestions.
 function renderSuggestion(suggestion, {query}) {
 
-  const suggestionText = suggestion.name
+  const suggestionText = suggestion.name;
   const matches = match(suggestionText, query);
   const parts = parse(suggestionText, matches);
 

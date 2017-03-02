@@ -6,6 +6,7 @@ body {
   position: relative;
 }
 
+//input field
 .react-autosuggest__input {
   width: 240px;
   height: 30px;
@@ -21,6 +22,7 @@ body {
   outline: none;
 }
 
+
 .react-autosuggest__container--open .react-autosuggest__input {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -28,6 +30,11 @@ body {
 
 .react-autosuggest__suggestions-container {
   display: none;
+}
+
+.react-autosuggest__suggestion--focused {
+  background-color: #0C7EAF;
+  color: #fff;
 }
 
 .react-autosuggest__container--open .react-autosuggest__suggestions-container {
@@ -61,12 +68,7 @@ body {
 }
 
 .react-autosuggest__suggestion:not(:first-child) {
-  border-top: 1px solid #ddd;
-}
-
-.react-autosuggest__suggestion--focused {
-  background-color: #0C7EAF;
-  color: #fff;
+  border-top: 1px solid #aaaaaa;
 }
 
 .suggestion-content {
@@ -103,4 +105,5 @@ body {
 
 .react-autosuggest__suggestion--focused .highlight {
   color: #120000;
+  background-color: #0C7EAF;
 }
