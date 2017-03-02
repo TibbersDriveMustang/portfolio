@@ -127,14 +127,10 @@ export default class SearchSuggest extends React.Component {
     };
   }
 
-  onChange(event, { newValue }){
+  onChange(event, { newValue, method }){
     this.setState({
       value: newValue
     });
-  };
-
-  onBlur(event, {highlightedSuggestion}){
-
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -160,7 +156,7 @@ export default class SearchSuggest extends React.Component {
       placeholder: 'Type a programming language',
       value,
       onChange: this.onChange.bind(this),
-      onBlur: this.onBlur.bind(this)
+      // onBlur: this.onBlur.bind(this)
     };
 
     // Finally, render it!

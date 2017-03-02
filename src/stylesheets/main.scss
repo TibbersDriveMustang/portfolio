@@ -56,6 +56,10 @@ body {
   padding: 10px 20px;
 }
 
+.react-autosuggest__suggestion:hover {
+  background-color: #0C7EAF;
+}
+
 .react-autosuggest__suggestion:not(:first-child) {
   border-top: 1px solid #ddd;
 }
