@@ -4,7 +4,8 @@
 
 import React from 'react'
 import AutoSuggest from 'react-autosuggest'
-
+import match from 'autosuggest-highlight/match/index'
+import parse from 'autosuggest-highlight/parse/index'
 
 const languages = [
   {
@@ -73,6 +74,7 @@ const getSuggestions = value => {
   return inputLength === 0 ? [] : languages.filter(lang =>
     lang.name.toLowerCase().slice(0, inputLength) === inputValue
   );
+  // return this.props.arrays
 };
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
@@ -81,15 +83,38 @@ const getSuggestions = value => {
 const getSuggestionValue = suggestion => suggestion.name;
 
 // Use your imagination to render suggestions.
-const renderSuggestion = suggestion => (
-  <div>
-    <img />{suggestion.name}
-  </div>
-);
+function renderSuggestion(suggestion, {query}) {
+
+  const suggestionText = suggestion.name
+  const matches = match(suggestionText, query);
+  const parts = parse(suggestionText, matches);
+
+  const spanStyle = {
+    backgroundImage: 'url(' + 'https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/48.jpg' + ')'
+  };
+
+
+
+  return (
+    <span className={'suggestion-content ' + suggestion.name} style={spanStyle}>
+      <span className="name">
+      {
+        parts.map((part, index) => {
+          const className = part.highlight ? 'highlight' : null;
+          return (
+            <span className={className} key={index}>{part.text}</span>
+          );
+        })
+      }
+      </span>
+    </span>
+  )
+
+};
 
 export default class SearchSuggest extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     // Autosuggest is a controlled component.
     // This means that you need to provide an input value
@@ -106,6 +131,10 @@ export default class SearchSuggest extends React.Component {
     this.setState({
       value: newValue
     });
+  };
+
+  onBlur(event, {highlightedSuggestion}){
+
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -131,7 +160,7 @@ export default class SearchSuggest extends React.Component {
       placeholder: 'Type a programming language',
       value,
       onChange: this.onChange.bind(this),
-      
+      onBlur: this.onBlur.bind(this)
     };
 
     // Finally, render it!
