@@ -72,7 +72,7 @@ const languages = [
 
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = value => {
+const getSuggestions = (value, props) => {
   // const escapedValue = escapeRegexCharacters(value.trim());
   // if (escapedValue === '') {
   //   return [];
@@ -83,9 +83,10 @@ const getSuggestions = value => {
 
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
+  const arr = props.arrays;
 
-  return inputLength === 0 ? [] : languages.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
+  return inputLength === 0 ? [] : arr.filter(user =>
+    user.login.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
 
@@ -97,7 +98,7 @@ const getSuggestionValue = suggestion => suggestion.name;
 // Use your imagination to render suggestions.
 function renderSuggestion(suggestion, {query}) {
 
-  const suggestionText = suggestion.name;
+  const suggestionText = suggestion.login;
   const matches = match(suggestionText, query);
   const parts = parse(suggestionText, matches);
 
@@ -108,7 +109,7 @@ function renderSuggestion(suggestion, {query}) {
 
 
   return (
-    <span className={'suggestion-content ' + suggestion.name} style={spanStyle}>
+    <span className={'suggestion-content ' + suggestion.login} style={spanStyle}>
       <span className="name">
       {
         parts.map((part, index) => {
@@ -162,7 +163,7 @@ export default class SearchSuggest extends React.Component {
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested({ value }){
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: getSuggestions(value, this.props)
     });
   };
 
