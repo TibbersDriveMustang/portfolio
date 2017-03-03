@@ -98,12 +98,14 @@ const getSuggestionValue = suggestion => suggestion.name;
 // Use your imagination to render suggestions.
 function renderSuggestion(suggestion, {query}) {
 
-  const suggestionText = suggestion.login;
-  const matches = match(suggestionText, query);
-  const parts = parse(suggestionText, matches);
+  const userLogin = suggestion.login;
+  const userAvatar = suggestion.avatar_url;
+  const matches = match(userLogin, query);
+  const parts = parse(userLogin, matches);
 
   const spanStyle = {
-    backgroundImage: 'url(' + 'https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/48.jpg' + ')'
+    backgroundImage: 'url(' + userAvatar + ')',
+    backgroundSize: '22% 110%'
   };
 
 
@@ -179,7 +181,7 @@ export default class SearchSuggest extends React.Component {
 
     // Autosuggest will pass through all these props to the input element.
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder: 'Type a User Name',
       value,
       onChange: this.onChange.bind(this),
       onBlur: this.onBlur.bind(this),

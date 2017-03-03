@@ -71,13 +71,13 @@ export default class GitUserSearch extends React.Component {
     return (
       <div>
         <h1>GitHub User Search</h1>
-        {/*<SearchBar/>*/}
+
         <input type="text" value={this.state.userName} onChange={this.handleUserChange} list="user-list"/>
         {
           arrays == null ?
           <h3>Array is null</h3> : <div><Autocomplete options1={arrays} ref={input => _user = input}/>
           <SearchSuggest arrays={arrays}/>
-            <Example />
+            {/*<Example />*/}
           </div>
         }
 
