@@ -7,6 +7,8 @@ import AutoSuggest from 'react-autosuggest'
 import match from 'autosuggest-highlight/match/index'
 import parse from 'autosuggest-highlight/parse/index'
 
+// import { escapeRegexCharacters } from 'utils/utils';
+
 const languages = [
   {
     name: 'C',
@@ -71,6 +73,14 @@ const languages = [
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
+  // const escapedValue = escapeRegexCharacters(value.trim());
+  // if (escapedValue === '') {
+  //   return [];
+  // }
+  // const regex = new RegExp('^' + escapedValue, 'i');
+  //
+  // return languages.filter(language => regex.test(language.name));
+
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
@@ -130,9 +140,22 @@ export default class SearchSuggest extends React.Component {
   }
 
   onChange(event, { newValue, method }){
+
     this.setState({
       value: newValue
     });
+    if(method == "down"){
+      console.log("Down Arrow Pressed");
+      console.log(this.state.value);
+    }
+  };
+
+  onKeyDown(){
+    console.log("key down")
+  };
+
+  onBlur(){
+    console.log("blur")
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -158,8 +181,12 @@ export default class SearchSuggest extends React.Component {
       placeholder: 'Type a programming language',
       value,
       onChange: this.onChange.bind(this),
-      // onBlur: this.onBlur.bind(this)
+      onBlur: this.onBlur.bind(this),
+      onKeyDown: this.onKeyDown.bind(this)
     };
+
+    console.log('SearchSuggest 188: ');
+    console.log(this.props.arrays);
 
     // Finally, render it!
     return (
