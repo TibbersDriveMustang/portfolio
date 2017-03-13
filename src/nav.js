@@ -37,9 +37,9 @@ export class Navigation extends React.Component{
               </NavItem>
             </LinkContainer>
 
-            <LinkContainer to="SearchResult">
+            <LinkContainer to="AjaxLiveSearch">
               <NavItem eventKey={2}>
-                About
+                AjaxLiveSearch
               </NavItem>
             </LinkContainer>
 

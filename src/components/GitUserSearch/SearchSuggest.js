@@ -7,69 +7,6 @@ import AutoSuggest from 'react-autosuggest'
 import match from 'autosuggest-highlight/match/index'
 import parse from 'autosuggest-highlight/parse/index'
 
-// import { escapeRegexCharacters } from 'utils/utils';
-
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'C#',
-    year: 2000
-  },
-  {
-    name: 'C++',
-    year: 1983
-  },
-  {
-    name: 'Clojure',
-    year: 2007
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-  {
-    name: 'Go',
-    year: 2009
-  },
-  {
-    name: 'Haskell',
-    year: 1990
-  },
-  {
-    name: 'Java',
-    year: 1995
-  },
-  {
-    name: 'Javascript',
-    year: 1995
-  },
-  {
-    name: 'Perl',
-    year: 1987
-  },
-  {
-    name: 'PHP',
-    year: 1995
-  },
-  {
-    name: 'Python',
-    year: 1991
-  },
-  {
-    name: 'Ruby',
-    year: 1995
-  },
-  {
-    name: 'Scala',
-    year: 2003
-  }
-];
-
-
-
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (value, props) => {
@@ -93,13 +30,15 @@ const getSuggestions = (value, props) => {
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name;
+// put suggestion.login to the input section
+const getSuggestionValue = suggestion => suggestion.login;
 
 // Use your imagination to render suggestions.
 function renderSuggestion(suggestion, {query}) {
 
   const userLogin = suggestion.login;
   const userAvatar = suggestion.avatar_url;
+  const userLink = suggestion.html_url;
   const matches = match(userLogin, query);
   const parts = parse(userLogin, matches);
 
@@ -111,20 +50,21 @@ function renderSuggestion(suggestion, {query}) {
 
 
   return (
-    <span className={'suggestion-content ' + suggestion.login} style={spanStyle}>
-      <span className="name">
-      {
-        parts.map((part, index) => {
-          const className = part.highlight ? 'highlight' : null;
-          return (
-            <span className={className} key={index}>{part.text}</span>
-          );
-        })
-      }
-      </span>
-    </span>
-  )
 
+      <span className={'suggestion-content ' + suggestion.login} style={spanStyle} onClick={window.open('http://www.facebook.com')}>
+        <span className="name">
+        {
+          parts.map((part, index) => {
+            const className = part.highlight ? 'highlight' : null;
+            return (
+              <span className={className} key={index}>{part.text}</span>
+            );
+          })
+        }
+        </span>
+      </span>
+
+  )
 };
 
 export default class SearchSuggest extends React.Component {
@@ -143,22 +83,36 @@ export default class SearchSuggest extends React.Component {
   }
 
   onChange(event, { newValue, method }){
+    event.preventDefault();
 
-    this.setState({
-      value: newValue
-    });
-    if(method == "down"){
-      console.log("Down Arrow Pressed");
-      console.log(this.state.value);
+    console.log("newValue:");
+    console.log(newValue);
+    console.log("event:");
+    console.log(event.type);
+    console.log("method:");
+    console.log(method);
+    const act = event.type;
+    const met = method;
+    console.log(met)
+    if(act == 'change' || act == 'click' || met == 'down' || met == 'up') {
+      console.log("State updated");
+      this.setState({
+        value: newValue
+      });
+    }
+    if(met == 'enter' || act == 'click'){
+      console.log("Go to User Page");
+      console.log(newValue);
+      // window.open('www.facebook.com');
     }
   };
 
-  onKeyDown(){
-    console.log("key down")
-  };
+  // onKeyDown(){
+  //   console.log("key down")
+  // };
 
   onBlur(){
-    console.log("blur")
+    console.log("blur");
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -185,7 +139,7 @@ export default class SearchSuggest extends React.Component {
       value,
       onChange: this.onChange.bind(this),
       onBlur: this.onBlur.bind(this),
-      onKeyDown: this.onKeyDown.bind(this)
+      // onKeyDown: this.onKeyDown.bind(this)
     };
 
     console.log('SearchSuggest 188: ');

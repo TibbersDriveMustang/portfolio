@@ -5,6 +5,8 @@ import App from "./components/App";
 import {SearchBar} from "./components/GitUserSearch/SearchBar";
 import SearchResults from "./components/GitUserSearch/SearchResults"
 import GitUserSearch from "./components/GitUserSearch/GitUserSearch"
+import AjaxLiveSearch from "./components/AjaxLiveSearch/AjaxLiveSearch"
+
 import NotFound from "./components/NotFound";
 
 // build the router
@@ -16,6 +18,7 @@ const router = (
       <Route path="SearchBar" component={SearchBar}/>
       <Route path="SearchResults" component={SearchResults}/>
       <Route path="GitUserSearch" component={GitUserSearch}/>
+      <Route path="AjaxLiveSearch" component={AjaxLiveSearch} />
       <Route path="*" component={NotFound}/>
     </Route>
 
