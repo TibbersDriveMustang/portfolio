@@ -3,13 +3,38 @@
  */
 
 import React from 'react'
+import data from './data.json'
 
 export default class AjaxLiveSearch extends React.Component{
   constructor(){
     super();
-    let test = React.getJSON('./data.json')
+    // let test = React.getJSON('./data.json')
+
+    // let test = data
+    // let test2 = JSON.stringify(data);
+    // console.log(test);
+    // console.log(test2);
+    let jsonLoader = new XMLHttpRequest();
+    jsonLoader.overrideMimeType("application/json");
     console.log('Ajax Live Search');
-    console.log(test);
+    jsonLoader.open("GET",'./data.json',true);
+    console.log('Ajax Live Search Done');
+
+    jsonLoader.onreadystatechange = function(){
+      let count = 0;
+      console.log(`Ajax Live Search ${count++}`);
+      if(jsonLoader.readyState === 4 && jsonLoader.status == "200"){
+        console.log('Ajax Live Search 4');
+        let jsonText = jsonLoader.responseText;
+        console.log(jsonLoader.responseText);
+      }
+    }
+    console.log('Ajax Live Search Done 5');
+    let jsonText = jsonLoader.responseText;
+    console.log(jsonText);
+    jsonLoader.send(null);
+
+
   }
 
 

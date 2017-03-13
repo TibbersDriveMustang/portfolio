@@ -34,10 +34,6 @@ module.exports = {
         test: /\.css$/,
         loaders: ['style', 'css'],
       },
-      {
-        test: /\.json$/,
-        loader:['json']
-      }
     ],
   },
   devServer: {
