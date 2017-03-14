@@ -20,7 +20,7 @@ export default class GitUserSearch extends React.Component {
       gitResponse: {},
       xmlHttp: new XMLHttpRequest(),
       userName: 'aron'
-    }
+    };
 
     this.handleUserChange = this.handleUserChange.bind(this);
   }
@@ -32,7 +32,7 @@ export default class GitUserSearch extends React.Component {
   }
 
   componentDidMount(){
-    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName, false);
+    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName, false);  //synchronouse loading
     console.log('componentDidMount');
     this.state.xmlHttp.send(null);
     this.setState({
@@ -45,7 +45,7 @@ export default class GitUserSearch extends React.Component {
       userName: event.target.value
     });
 
-    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName + '&per_page=10', false);
+    this.state.xmlHttp.open("GET", 'https://api.github.com/search/users?q=' + this.state.userName + '&per_page=10', false);  //synchronous loading
     this.state.xmlHttp.send(null);
 
     this.setState({

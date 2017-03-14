@@ -14,23 +14,39 @@ export default class AjaxLiveSearch extends React.Component{
     // let test2 = JSON.stringify(data);
     // console.log(test);
     // console.log(test2);
-    let jsonLoader = new XMLHttpRequest();
-    jsonLoader.overrideMimeType("application/json");
-    console.log('Ajax Live Search');
-    jsonLoader.open("GET",'https://raw.githubusercontent.com/TibbersDriveMustang/portfolio/master/src/components/AjaxLiveSearch/data.json',true);   //synchronous loading
-    jsonLoader.send(null);
-    console.log('Ajax Live Search Done');
-    // let temp = JSON.parse(data);
-    // console.log(temp);
 
-    jsonLoader.onreadystatechange = function(){
+    this.state = {
+      jsonLoader: new XMLHttpRequest()
+    };
 
-      if(jsonLoader.readyState === 4 && jsonLoader.status == "200"){ //&& jsonLoader.status == "200"
-        console.log('Ajax Live Search "readyState" : ');
-        let jsonText = JSON.parse(jsonLoader.responseText);
-        console.log(jsonText);
-      }
-    }
+
+
+  }
+
+  componentWillMount(){
+
+    // console.log(jLoad);
+    // this.state.jsonLoader.onreadystatechange = function(){
+    //
+    //   if(jLoad.readyState === 4 && jLoad.status == "200"){
+    //     console.log('Ajax Live Search "readyState" : ');
+    //     this.setState({
+    //       jsonText: JSON.parse(jLoad.responseText)
+    //     });
+    //   }
+    // }
+
+    this.state.jsonLoader.overrideMimeType("application/json");
+    this.state.jsonLoader.open("GET",'https://raw.githubusercontent.com/TibbersDriveMustang/portfolio/master/src/components/AjaxLiveSearch/data.json',false);   //synchronous loading
+    this.state.jsonLoader.send(null);
+    console.log(JSON.parse(this.state.jsonLoader.responseText));
+    // this.setState({
+    //   response: JSON.parse(this.state.jsonLoader.responseText)
+    // });
+  }
+
+  componentDidMount(){
+    console.log(this.state.jsonLoader.responseText);
   }
 
 
