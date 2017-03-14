@@ -17,24 +17,20 @@ export default class AjaxLiveSearch extends React.Component{
     let jsonLoader = new XMLHttpRequest();
     jsonLoader.overrideMimeType("application/json");
     console.log('Ajax Live Search');
-    jsonLoader.open("GET",'./data.json',true);
+    jsonLoader.open("GET",'https://raw.githubusercontent.com/TibbersDriveMustang/portfolio/master/src/components/AjaxLiveSearch/data.json',true);   //synchronous loading
+    jsonLoader.send(null);
     console.log('Ajax Live Search Done');
+    // let temp = JSON.parse(data);
+    // console.log(temp);
 
     jsonLoader.onreadystatechange = function(){
-      let count = 0;
-      console.log(`Ajax Live Search ${count++}`);
-      if(jsonLoader.readyState === 4 && jsonLoader.status == "200"){
-        console.log('Ajax Live Search 4');
-        let jsonText = jsonLoader.responseText;
-        console.log(jsonLoader.responseText);
+
+      if(jsonLoader.readyState === 4 && jsonLoader.status == "200"){ //&& jsonLoader.status == "200"
+        console.log('Ajax Live Search "readyState" : ');
+        let jsonText = JSON.parse(jsonLoader.responseText);
+        console.log(jsonText);
       }
     }
-    console.log('Ajax Live Search Done 5');
-    let jsonText = jsonLoader.responseText;
-    console.log(jsonText);
-    jsonLoader.send(null);
-
-
   }
 
 
